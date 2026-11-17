@@ -13,6 +13,7 @@ namespace Inventory.Api.Controllers
             new Product { Id = 3, Name = "USB-C Hub", Price = 39.00m, StockQuantity = 85 }
         ];
 
+        // Returns all products
         [HttpGet(Name = "GetProducts")]
         public IEnumerable<Product> Get()
         {
