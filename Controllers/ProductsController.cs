@@ -19,5 +19,20 @@ namespace Inventory.Api.Controllers
         {
             return SampleProducts;
         }
+
+        // Returns a single product by Id, or 404 if not found
+        [HttpGet("{id:int}", Name = "GetProductById")]
+        [ProducesResponseType(typeof(Product), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<Product> GetById(int id)
+        {
+            var product = SampleProducts.FirstOrDefault(p => p.Id == id);
+            if (product is null)
+            {
+                return NotFound();
+            }
+
+            return product;
+        }
     }
 }
