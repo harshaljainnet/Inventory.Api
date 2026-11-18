@@ -34,5 +34,44 @@ namespace Inventory.Api.Controllers
 
             return product;
         }
+
+        // Adjusts a product's stock by a signed amount (positive adds, negative removes).
+        // Returns 404 if the product is missing, 400 if the result would be negative.
+        [HttpPatch("{id:int}/stock", Name = "AdjustProductStock")]
+        [ProducesResponseType(typeof(Product), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<Product> AdjustStock(int id, [FromBody] StockAdjustment adjustment)
+        {
+            var product = SampleProducts.FirstOrDefault(p => p.Id == id);
+            if (product is null)
+            {
+                return NotFound();
+            }
+
+            lock (product)
+            {
+                long newQuantity = (long)product.StockQuantity + adjustment.Amount;
+                if (newQuantity < 0 || newQuantity > int.MaxValue)
+                {
+                    return BadRequest(new ProblemDetails
+                    {
+                        Title = "Invalid stock adjustment",
+                        Detail = $"Adjusting stock of {product.StockQuantity} by {adjustment.Amount} would result in an invalid quantity.",
+                        Status = StatusCodes.Status400BadRequest
+                    });
+                }
+
+                product.StockQuantity = (int)newQuantity;
+            }
+
+            return product;
+        }
+    }
+
+    public class StockAdjustment
+    {
+        // Signed amount to add to the current stock (negative to remove).
+        public int Amount { get; set; }
     }
 }
