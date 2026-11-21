@@ -16,9 +16,29 @@ namespace Inventory.Api.Services
         [
             new Product { Id = 1, Name = "Wireless Mouse", Price = 24.99m, StockQuantity = 150, CategoryId = 1, SupplierId = 1 },
             new Product { Id = 2, Name = "Mechanical Keyboard", Price = 79.50m, StockQuantity = 60, CategoryId = 2, SupplierId = 2 },
-            new Product { Id = 3, Name = "USB-C Hub", Price = 39.00m, StockQuantity = 85, CategoryId = 3, SupplierId = 3 }
+            new Product { Id = 3, Name = "USB-C Hub", Price = 39.00m, StockQuantity = 85, CategoryId = 3, SupplierId = 3 },
+            new Product { Id = 4, Name = "Ergonomic Vertical Mouse", Price = 44.95m, StockQuantity = 8, CategoryId = 1, SupplierId = 1 },
+            new Product { Id = 5, Name = "Gaming Mouse 16000 DPI", Price = 59.99m, StockQuantity = 42, CategoryId = 1, SupplierId = 1 },
+            new Product { Id = 6, Name = "Compact Wireless Keyboard", Price = 49.00m, StockQuantity = 73, CategoryId = 2, SupplierId = 2 },
+            new Product { Id = 7, Name = "Low-Profile Bluetooth Keyboard", Price = 64.90m, StockQuantity = 5, CategoryId = 2, SupplierId = 2 },
+            new Product { Id = 8, Name = "Laptop Stand (Aluminium)", Price = 34.50m, StockQuantity = 120, CategoryId = 3, SupplierId = 3 },
+            new Product { Id = 9, Name = "Cable Organizer Set", Price = 12.99m, StockQuantity = 200, CategoryId = 3, SupplierId = 3 },
+            new Product { Id = 10, Name = "24\" Full HD IPS Monitor", Price = 139.00m, StockQuantity = 27, CategoryId = 4, SupplierId = 4 },
+            new Product { Id = 11, Name = "27\" 4K UHD Monitor", Price = 329.00m, StockQuantity = 9, CategoryId = 4, SupplierId = 4 },
+            new Product { Id = 12, Name = "34\" Ultrawide Curved Monitor", Price = 449.99m, StockQuantity = 14, CategoryId = 4, SupplierId = 4 },
+            new Product { Id = 13, Name = "Noise-Cancelling Headset", Price = 89.00m, StockQuantity = 55, CategoryId = 5, SupplierId = 5 },
+            new Product { Id = 14, Name = "USB Conference Speakerphone", Price = 119.00m, StockQuantity = 3, CategoryId = 5, SupplierId = 5 },
+            new Product { Id = 15, Name = "Desktop Studio Microphone", Price = 74.50m, StockQuantity = 31, CategoryId = 5, SupplierId = 5 },
+            new Product { Id = 16, Name = "1TB Portable SSD", Price = 99.99m, StockQuantity = 64, CategoryId = 6, SupplierId = 6 },
+            new Product { Id = 17, Name = "2TB External Hard Drive", Price = 69.00m, StockQuantity = 48, CategoryId = 6, SupplierId = 6 },
+            new Product { Id = 18, Name = "128GB USB 3.2 Flash Drive", Price = 17.49m, StockQuantity = 310, CategoryId = 6, SupplierId = 6 },
+            new Product { Id = 19, Name = "Wi-Fi 6 Router AX3000", Price = 129.00m, StockQuantity = 22, CategoryId = 7, SupplierId = 7 },
+            new Product { Id = 20, Name = "8-Port Gigabit Switch", Price = 38.95m, StockQuantity = 6, CategoryId = 7, SupplierId = 7 },
+            new Product { Id = 21, Name = "Cat6 Ethernet Cable 10m", Price = 8.49m, StockQuantity = 400, CategoryId = 7, SupplierId = 7 },
+            new Product { Id = 22, Name = "1080p HD Webcam", Price = 54.99m, StockQuantity = 38, CategoryId = 8, SupplierId = 5 },
+            new Product { Id = 23, Name = "4K Streaming Webcam", Price = 149.00m, StockQuantity = 0, CategoryId = 8, SupplierId = 5 }
         ];
-        private int _nextId = 4;
+        private int _nextId = 24;
 
         // In-memory log of all stock adjustments, in the order they were applied
         private readonly List<StockAdjustmentRecord> _stockHistory = [];

@@ -10,9 +10,13 @@ namespace Inventory.Api.Services
         [
             new Supplier { Id = 1, Name = "Logi Distribution", ContactEmail = "sales@logi-dist.example" },
             new Supplier { Id = 2, Name = "KeyCraft Wholesale", ContactEmail = "orders@keycraft.example" },
-            new Supplier { Id = 3, Name = "Hubworks Supply", ContactEmail = null }
+            new Supplier { Id = 3, Name = "Hubworks Supply", ContactEmail = null },
+            new Supplier { Id = 4, Name = "Pixel Display Co.", ContactEmail = "wholesale@pixeldisplay.example" },
+            new Supplier { Id = 5, Name = "SoundWave Trading", ContactEmail = "orders@soundwave-trading.example" },
+            new Supplier { Id = 6, Name = "DataVault Distribution", ContactEmail = "sales@datavault-dist.example" },
+            new Supplier { Id = 7, Name = "NetLink Supply", ContactEmail = null }
         ];
-        private int _nextId = 4;
+        private int _nextId = 8;
 
         public IReadOnlyList<SupplierDto> GetAll()
         {

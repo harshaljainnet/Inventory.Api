@@ -10,9 +10,14 @@ namespace Inventory.Api.Services
         [
             new Category { Id = 1, Name = "Mice" },
             new Category { Id = 2, Name = "Keyboards" },
-            new Category { Id = 3, Name = "Accessories" }
+            new Category { Id = 3, Name = "Accessories" },
+            new Category { Id = 4, Name = "Monitors" },
+            new Category { Id = 5, Name = "Headsets & Audio" },
+            new Category { Id = 6, Name = "Storage" },
+            new Category { Id = 7, Name = "Networking" },
+            new Category { Id = 8, Name = "Webcams" }
         ];
-        private int _nextId = 4;
+        private int _nextId = 9;
 
         public IReadOnlyList<CategoryDto> GetAll()
         {
