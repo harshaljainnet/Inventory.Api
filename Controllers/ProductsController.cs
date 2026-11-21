@@ -22,6 +22,14 @@ namespace Inventory.Api.Controllers
             return _productService.GetAll();
         }
 
+        // Returns products with stock below 10
+        [HttpGet("low-stock", Name = "GetLowStockProducts")]
+        [ProducesResponseType(typeof(IEnumerable<ProductDto>), StatusCodes.Status200OK)]
+        public IEnumerable<ProductDto> GetLowStock()
+        {
+            return _productService.GetLowStock();
+        }
+
         // Returns a single product by Id, or 404 if not found
         [HttpGet("{id:int}", Name = "GetProductById")]
         [ProducesResponseType(typeof(ProductDto), StatusCodes.Status200OK)]

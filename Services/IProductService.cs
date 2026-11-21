@@ -8,6 +8,9 @@ namespace Inventory.Api.Services
 
         ProductDto? GetById(int id);
 
+        // Products whose stock is below LowStockThreshold.
+        IReadOnlyList<ProductDto> GetLowStock();
+
         IReadOnlyList<ProductDto> GetByCategory(int categoryId);
 
         IReadOnlyList<ProductDto> GetBySupplier(int supplierId);

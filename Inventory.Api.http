@@ -1,6 +1,121 @@
 @Inventory.Api_HostAddress = http://localhost:5241
 
-GET {{Inventory.Api_HostAddress}}/weatherforecast/
+### ===================== Products =====================
+
+### Get all products
+GET {{Inventory.Api_HostAddress}}/products
 Accept: application/json
 
-###
+### Get products with stock below 10
+GET {{Inventory.Api_HostAddress}}/products/low-stock
+Accept: application/json
+
+### Get product by id (404 if missing)
+GET {{Inventory.Api_HostAddress}}/products/1
+Accept: application/json
+
+### Create product (400 if category or supplier does not exist)
+POST {{Inventory.Api_HostAddress}}/products
+Content-Type: application/json
+
+{
+  "name": "Webcam",
+  "price": 49.99,
+  "stockQuantity": 5,
+  "categoryId": 1,
+  "supplierId": 1
+}
+
+### Update product details (does not change stock)
+PUT {{Inventory.Api_HostAddress}}/products/1
+Content-Type: application/json
+
+{
+  "name": "Wireless Mouse Pro",
+  "price": 29.99,
+  "categoryId": 1,
+  "supplierId": 1
+}
+
+### Adjust stock (positive adds, negative removes; 400 if result would be negative)
+PATCH {{Inventory.Api_HostAddress}}/products/1/stock
+Content-Type: application/json
+
+{
+  "amount": -145
+}
+
+### Get stock history for a product (404 if product missing)
+GET {{Inventory.Api_HostAddress}}/products/1/stock-history
+Accept: application/json
+
+### Delete product and its stock history
+DELETE {{Inventory.Api_HostAddress}}/products/1
+
+### ===================== Categories =====================
+
+### Get all categories
+GET {{Inventory.Api_HostAddress}}/categories
+Accept: application/json
+
+### Get category by id (404 if missing)
+GET {{Inventory.Api_HostAddress}}/categories/1
+Accept: application/json
+
+### Create category (409 if name already used)
+POST {{Inventory.Api_HostAddress}}/categories
+Content-Type: application/json
+
+{
+  "name": "Monitors"
+}
+
+### Rename category
+PUT {{Inventory.Api_HostAddress}}/categories/1
+Content-Type: application/json
+
+{
+  "name": "Mice"
+}
+
+### Get products in a category (404 if category missing)
+GET {{Inventory.Api_HostAddress}}/categories/1/products
+Accept: application/json
+
+### Delete category (409 if products still belong to it)
+DELETE {{Inventory.Api_HostAddress}}/categories/1
+
+### ===================== Suppliers =====================
+
+### Get all suppliers
+GET {{Inventory.Api_HostAddress}}/suppliers
+Accept: application/json
+
+### Get supplier by id (404 if missing)
+GET {{Inventory.Api_HostAddress}}/suppliers/1
+Accept: application/json
+
+### Create supplier (409 if name already used)
+POST {{Inventory.Api_HostAddress}}/suppliers
+Content-Type: application/json
+
+{
+  "name": "Acme Components",
+  "contactEmail": "sales@acme.example"
+}
+
+### Update supplier name and contact email
+PUT {{Inventory.Api_HostAddress}}/suppliers/1
+Content-Type: application/json
+
+{
+  "name": "Acme Components Ltd",
+  "contactEmail": "orders@acme.example"
+}
+
+### Get products from a supplier (404 if supplier missing)
+GET {{Inventory.Api_HostAddress}}/suppliers/1/products
+Accept: application/json
+
+### Delete supplier (409 if products are still supplied by it)
+DELETE {{Inventory.Api_HostAddress}}/suppliers/1

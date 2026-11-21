@@ -6,6 +6,8 @@ namespace Inventory.Api.Services
     // All state is guarded by a single lock (_sync); ToDto must be called while holding it.
     public class ProductService : IProductService
     {
+        private const int LowStockThreshold = 10;
+
         private readonly ICategoryService _categoryService;
         private readonly ISupplierService _supplierService;
         private readonly object _sync = new();
@@ -41,6 +43,14 @@ namespace Inventory.Api.Services
             {
                 var product = _products.FirstOrDefault(p => p.Id == id);
                 return product is null ? null : ToDto(product);
+            }
+        }
+
+        public IReadOnlyList<ProductDto> GetLowStock()
+        {
+            lock (_sync)
+            {
+                return _products.Where(p => p.StockQuantity < LowStockThreshold).Select(ToDto).ToList();
             }
         }
 
