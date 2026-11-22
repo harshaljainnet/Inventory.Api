@@ -15,6 +15,9 @@ namespace Inventory.Api.Services
 
         IReadOnlyList<ProductDto> GetBySupplier(int supplierId);
 
+        // Stock position of one supplier. NotFound if the supplier does not exist.
+        ServiceResult<SupplierSummaryDto> GetSupplierSummary(int supplierId);
+
         ServiceResult<ProductDto> Create(CreateProductRequest request);
 
         ServiceResult<ProductDto> Update(int id, UpdateProductRequest request);

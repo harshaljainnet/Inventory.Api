@@ -90,6 +90,31 @@ namespace Inventory.Api.Services
             }
         }
 
+        public ServiceResult<SupplierSummaryDto> GetSupplierSummary(int supplierId)
+        {
+            lock (_sync)
+            {
+                var supplier = _supplierService.GetById(supplierId);
+                if (supplier is null)
+                {
+                    return ServiceResult<SupplierSummaryDto>.NotFound();
+                }
+
+                var products = _products.Where(p => p.SupplierId == supplierId).ToList();
+                return ServiceResult<SupplierSummaryDto>.Ok(new SupplierSummaryDto
+                {
+                    SupplierId = supplier.Id,
+                    SupplierName = supplier.Name,
+                    ProductCount = products.Count,
+                    TotalStockQuantity = products.Sum(p => p.StockQuantity),
+                    TotalStockValue = products.Sum(p => p.Price * p.StockQuantity),
+                    Products = products
+                        .Select(p => new SupplierSummaryProductDto { Name = p.Name, StockQuantity = p.StockQuantity })
+                        .ToList()
+                });
+            }
+        }
+
         public ServiceResult<ProductDto> Create(CreateProductRequest request)
         {
             var error = ValidateReferences(request);

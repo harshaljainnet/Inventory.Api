@@ -95,5 +95,20 @@ namespace Inventory.Api.Controllers
 
             return Ok(_productService.GetBySupplier(id));
         }
+
+        // Returns the stock position of a supplier, or 404 if the supplier is not found
+        [HttpGet("{id:int}/summary", Name = "GetSupplierSummary")]
+        [ProducesResponseType(typeof(SupplierSummaryDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<SupplierSummaryDto> GetSummary(int id)
+        {
+            var result = _productService.GetSupplierSummary(id);
+            if (!result.IsSuccess)
+            {
+                return this.Failure(result);
+            }
+
+            return result.Value!;
+        }
     }
 }

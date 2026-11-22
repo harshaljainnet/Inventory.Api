@@ -117,5 +117,18 @@ Content-Type: application/json
 GET {{Inventory.Api_HostAddress}}/suppliers/1/products
 Accept: application/json
 
+### Supplier summary - supplier with products (expected 200)
+GET {{Inventory.Api_HostAddress}}/suppliers/5/summary
+Accept: application/json
+
+### Supplier summary - supplier with no products (expected 200, zeros and empty list).
+### Run "Create supplier" first so a product-less supplier (id 8 on a fresh start) exists.
+GET {{Inventory.Api_HostAddress}}/suppliers/8/summary
+Accept: application/json
+
+### Supplier summary - supplier that does not exist (expected 404)
+GET {{Inventory.Api_HostAddress}}/suppliers/999/summary
+Accept: application/json
+
 ### Delete supplier (409 if products are still supplied by it)
 DELETE {{Inventory.Api_HostAddress}}/suppliers/1
