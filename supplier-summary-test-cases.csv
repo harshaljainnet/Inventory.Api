@@ -1,0 +1,20 @@
+ID,Type,Scenario,Setup / Steps,Expected Result
+TC01,Positive,Supplier with several products,Get summary for a supplier that has 3 products,Supplier id and name filled in; product count = 3; total stock = sum of stock; total value = sum of (price x stock)
+TC02,Positive,Product list shows only this supplier's products,Get summary for a supplier; other suppliers also have products,List has each of this supplier's products with name and stock quantity; no other supplier's product appears
+TC03,Positive,Stock increased,Increase stock of one product by 10; get summary,Total stock +10; total value increases by price x 10; product count unchanged
+TC04,Positive,Stock decreased,Decrease stock of one product by 5; get summary,Total stock -5; total value decreases by price x 5; product count unchanged
+TC05,Positive,New product added to supplier,Create a new product for the supplier; get summary,Product count +1; new product appears in the list; totals include it
+TC06,Positive,Product deleted,Delete one product of the supplier; get summary,Product count -1; deleted product not in list; totals exclude it
+TC07,Positive,Product moved to another supplier,Update a product and change its supplier from A to B; get summary of A and B,"A: count and totals go down, product gone from list. B: count and totals go up, product in list"
+TC08,Edge,Supplier with no products,Get summary for a supplier that exists but has no products,Success (not an error); count 0; total stock 0; total value 0; empty list
+TC09,Edge,Product with zero stock,Supplier has one product with stock 0 and others with stock,Zero-stock product is still in the list with stock 0; it adds 0 to total stock and 0 to total value
+TC10,Edge,All products have zero stock,Supplier whose products all have stock 0,Product count = number of products; total stock 0; total value 0; all products listed with stock 0
+TC11,Edge,Stock reduced to exactly zero,Reduce a product's stock by its full quantity; get summary,Product stays in the list with stock 0; total stock goes down by that quantity
+TC12,Edge,All products deleted,Delete every product of the supplier; get summary,Success; count 0; total stock 0; total value 0; empty list
+TC13,Edge,Supplier with exactly one product,Get summary for a supplier with a single product,Count = 1; totals equal that product's stock and price x stock; list has one item
+TC14,Edge,Decimal prices,Supplier with prices like 24.99 and 44.95,Total value is exact to 2 decimals; no rounding error
+TC15,Negative,Supplier does not exist,Get summary for supplier id 999,NotFound result; no value returned
+TC16,Negative,Invalid supplier ids,Get summary for supplier id 0 and -1,NotFound result; no value returned
+TC17,Negative,Stock reduced below zero,Reduce a product's stock by more than it has; get summary,Adjustment rejected as invalid; summary totals and list unchanged
+TC18,Negative,Product created with unknown supplier,Create a product with a supplier id that does not exist; get summary of existing suppliers,Create rejected as invalid; no supplier summary changes
+TC19,Negative,Product moved to unknown supplier,Update a product with a supplier id that does not exist; get summary of its current supplier,Update rejected as invalid; current supplier's summary unchanged

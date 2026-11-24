@@ -42,7 +42,7 @@ PATCH {{Inventory.Api_HostAddress}}/products/1/stock
 Content-Type: application/json
 
 {
-  "amount": -145
+  "amount": -200
 }
 
 ### Get stock history for a product (404 if product missing)
@@ -118,7 +118,7 @@ GET {{Inventory.Api_HostAddress}}/suppliers/1/products
 Accept: application/json
 
 ### Supplier summary - supplier with products (expected 200)
-GET {{Inventory.Api_HostAddress}}/suppliers/5/summary
+GET {{Inventory.Api_HostAddress}}/suppliers/1/summary
 Accept: application/json
 
 ### Supplier summary - supplier with no products (expected 200, zeros and empty list).
